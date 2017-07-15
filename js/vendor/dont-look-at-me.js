@@ -32,8 +32,7 @@ function agregarMascota(iniciales, nick, tlf, petName, petAge, petType) {
     
     var eventoMostrar = function (e) {
         e.preventDefault();
-        var resultado = listaMascotas();
-        resultadoHTML.innerHTML = resultado;
+        listaMascotas();
     };
             
     // Manejadores de eventos

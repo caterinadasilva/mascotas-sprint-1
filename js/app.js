@@ -39,7 +39,8 @@ function pedirDatos(){
   //Al finalizar debo llamar esta función (NO RETORNO NADA)
   agregarMascota(inicialesNombreApellido(nombre, apellido), nicknameUser, telefonoValido(telefono), nombreMascota, edadMascotaHumano(tipoMascota, edadMascota), tipoMascota);
   //esto debería sumar una nueva mascota al array Mascota[], cada vez que se crea un nuevo registro
-  mascotas.push(new nuevaMascota(inicialesNombreApellido(nombre, apellido), nicknameUser, telefonoValido(telefono), nombreMascota, edadMascotaHumano(tipoMascota, edadMascota), tipoMascota));
+  var mascota = new nuevaMascota(inicialesNombreApellido(nombre, apellido), nicknameUser, telefonoValido(telefono), nombreMascota, edadMascotaHumano(tipoMascota, edadMascota), tipoMascota);
+  mascotas.push(mascota);
 }
 
 function datoNoVacio(mensaje){
@@ -89,17 +90,17 @@ function mostrarOtroVet(){
 return alert("Lamentablemente, no tenemos especialistas para tu mascota, pero podemos recomendarte a:\nGabriel Cornejo.\n+56 9 7768 9936\nZenteno 122, Santiago Centro");
 }
 
-class nuevaMascota {
-  constructor(ind, nud, tel, nm, emh, tm){
+function nuevaMascota(ind, nud, tel, nm, emh, tm){
     this.inicialesUsuario = ind;
     this.nombreUsuario = nud;
     this.numeroTelefono = tel;
     this.nombreMasc = nm;
     this.edadMascHum = emh;
     this.espMasc = tm;
-  }
-  mostrar(){
-	  resultado += "<div class='col m4'>";
+    this.mostrar = function(){
+      var resultadoHTML = document.getElementById("contenedor-mascotas");
+	  var resultado = "";
+	  resultado += "<div class='box'>";
 	  resultado += "<div class='card purple lighten-1'>";
 	  resultado += "<div class='card-content white-text'>";
 	  resultado += "<p><strong>" + this.nombreMasc + "</strong></p>";	  
@@ -108,9 +109,13 @@ class nuevaMascota {
 	  resultado += "</div>";
 	  resultado += "</div>";
 	  resultado += "</div>";
+	  resultadoHTML.innerHTML += resultado;
 	}
 }
 
 function listaMascotas(){
   //Recorre el arreglo de mascotas y retorna la lista de las mismas en un string
+  mascotas.forEach(function(mascota) {
+  	mascota.mostrar();
+  });
 }
