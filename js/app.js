@@ -14,11 +14,15 @@ var inicialesNombreApellido = function(nombre, apellido){
 	return (nombre[0].charAt(0) + apellido[0].charAt(0)).toUpperCase();
 }
 
-var telefonoValido = function(validarTelefono){
-	if(validarTelefono == true) {
-		telefonoValido = telefono;
-	} else {
+var telefonoValido = function(telefono){
+  //Input: número de teléfono móvil
+  //Output: booleano
+  //Verifica que el número de teléfono tenga el formato "569" + "teléfono"
+	var validPhone = /^56(?=[1-9]\d{0,2}[1-9])(?=\d{2,15}$)\d+$/;	
+	if(!validPhone.test(telefono)){
 		return "Número de teléfono inválido"
+	} else {
+	 	return telefono;
 	}
 }
 
@@ -39,7 +43,7 @@ function pedirDatos(){
 }
 
 function datoNoVacio(mensaje){
-  //Solicita mediante un prompt¿ con el mensaje hasta que no sea vacío
+  //Solicita mediante un prompt con el mensaje hasta que no sea vacío
   //Retorna el valor ingresado en el prompt
   do {
   	var dato = prompt("Ingrese " + mensaje);
@@ -58,17 +62,6 @@ function validarMascota(mensaje){
 	 	mostrarOtroVet();
 		throw new Error("Flujo detenido");
   }
-}
-
-var validarTelefono = function(telefono){
-  //Input: número de teléfono móvil
-  //Output: booleano
-  //Verifica que el número de teléfono tenga el formato "569" + "teléfono"
-	if(typeof(telefono) == "number" && String(telefono).length == 11 && String(telefono).charAt(0) == 5 && String(telefono).charAt(1) == 6 && String(telefono).charAt(2) == 9){
-			return true;
-	} else {
-	 	return false;
-	}
 }
 
 var calcularEdadPerro = function(edad){
